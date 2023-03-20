@@ -1,0 +1,21 @@
+name: http-request-workflow
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        required: true
+        type: string
+      PR:
+        required: true
+        type: number
+
+jobs:
+  automatic:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@v2
+      with:
+        message: Success
+        pr_number: ${{ inputs.PR }}
