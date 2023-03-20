@@ -1,7 +1,7 @@
 name: http-request-workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       branch:
         required: true
@@ -12,6 +12,7 @@ on:
 
 jobs:
   automatic:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
     - name: Comment PR
@@ -19,3 +20,4 @@ jobs:
       with:
         message: Success!
         pr_number: ${{ inputs.PR }}
+
