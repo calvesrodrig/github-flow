@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Call http action
         # if: github.event.label.name == 'Em revisão'
+        shell: bash
         run: |
           echo "Chamando a action"          
           curl --request POST \
