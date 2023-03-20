@@ -1,17 +1,20 @@
 name: http-request-workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       branch:
+        description: the current branch
         required: true
         type: string
       PR:
         required: true
-        type: number
+        description: the current PR
+        type: string
 
 jobs:
   automatic:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
     - name: Comment PR
