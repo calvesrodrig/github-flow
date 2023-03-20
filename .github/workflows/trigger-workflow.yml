@@ -2,7 +2,7 @@ name: Main action
 
 on:
   pull_request:
-    branches: [develop]
+    branches: [master]
     types: [labeled]
 
 env:
