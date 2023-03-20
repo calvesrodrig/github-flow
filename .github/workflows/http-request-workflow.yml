@@ -4,11 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       branch:
+        description: the current branch
         required: true
         type: string
       PR:
         required: true
-        type: number
+        description: the current PR
+        type: string
 
 jobs:
   automatic:
@@ -18,6 +20,6 @@ jobs:
     - name: Comment PR
       uses: thollander/actions-comment-pull-request@v2
       with:
-        message: Success!!!
+        message: Success!
         pr_number: ${{ inputs.PR }}
-        comment_tag: steps
+        comment_tag: workflow_validation
