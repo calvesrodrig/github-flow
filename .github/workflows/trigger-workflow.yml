@@ -11,7 +11,7 @@ env:
 jobs:
   define-what-to-run:
     runs-on: ubuntu-latest
-      
+    permissions: write-all
     steps:
       - name: Call http action
         # if: github.event.label.name == 'Em revisão'
