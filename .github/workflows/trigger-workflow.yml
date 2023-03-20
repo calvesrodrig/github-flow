@@ -1,0 +1,25 @@
+name: Main action
+
+on:
+  pull_request:
+    branches: [master]
+    types: [labeled]
+
+env:
+  BRANCH: ${{ github.ref }}
+
+jobs:
+  define-what-to-run:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Call http action
+        if: github.event.label.name == 'Em revisão'
+        run: |
+          echo "Chamando a action"
+          curl \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --request POST \
+            --data '{"ref":"${{ github.ref }}","inputs":{"branch":"${{ github.ref }}","PR":"${{ github.event.number }}"}}' \
+            https://api.github.com/repos/calvesrodrig/github-flow/.github/workflows/http-request-workflow.yml/dispatches
