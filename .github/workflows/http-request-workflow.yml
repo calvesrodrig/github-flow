@@ -18,5 +18,5 @@ jobs:
     - name: Comment PR
       uses: thollander/actions-comment-pull-request@v2
       with:
-        message: Success
+        message: Fail
         pr_number: ${{ inputs.PR }}
