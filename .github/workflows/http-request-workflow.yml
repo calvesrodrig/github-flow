@@ -12,6 +12,7 @@ on:
 
 jobs:
   automatic:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
     - name: Comment PR
