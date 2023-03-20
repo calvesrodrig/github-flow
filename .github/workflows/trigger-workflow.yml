@@ -22,4 +22,4 @@ jobs:
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             --request POST \
             --data '{"ref":"${{ github.ref }}","inputs":{"branch":"${{ github.ref }}","PR":"${{ github.event.number }}"}}' \
-            https://api.github.com/repos/calvesrodrig/github-flow/.github/workflows/http-request-workflow.yml/dispatches
+            https://api.github.com/repos/calvesrodrig/github-flow/dispatches
