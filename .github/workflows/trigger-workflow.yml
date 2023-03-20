@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: echo branch
         run: echo ${{ github.ref }}
-        
+
       - name: Call http action
         # if: github.event.label.name == 'Em revisão'
         shell: bash
@@ -32,6 +32,7 @@ jobs:
       - name: Call http action again
         shell: bash
         run: |
+          sleep 2m
           echo "Chamando a action"          
           curl --request POST \
             --url 'https://api.github.com/repos/calvesrodrig/github-flow/actions/workflows/51755224/dispatches' \
