@@ -24,4 +24,4 @@ jobs:
             --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'Content-Type: application/json' \
             --header 'X-GitHub-Api-Version: 2022-11-28' \
-            --data '{"ref":"${{ github.ref }}","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}"}'
+            --data '{"ref":"master","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}"}'
