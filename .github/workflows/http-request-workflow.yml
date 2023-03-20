@@ -19,3 +19,4 @@ jobs:
       with:
         message: Success!
         pr_number: ${{ inputs.PR }}
+        comment_tag: workflow_validation
