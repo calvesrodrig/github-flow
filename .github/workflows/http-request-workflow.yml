@@ -1,7 +1,7 @@
 name: http-request-workflow
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       branch:
         required: true
