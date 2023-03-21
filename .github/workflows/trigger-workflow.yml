@@ -9,12 +9,12 @@ env:
   BRANCH: ${{ github.ref }}
 
 jobs:
-  define-what-to-run:
+  run-tests:
+    if: github.event.label.name == 'Em revisão'
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
       - name: Call http action
-        if: github.event.label.name == 'Em revisão'
         shell: bash
         run: |
           echo "Chamando a action"          
@@ -26,8 +26,12 @@ jobs:
             --header 'X-GitHub-Api-Version: 2022-11-28' \
             --data '{"ref":"master","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}", "result": "✅ Tests - Success"}'
 
+  auto-merge:
+    if: github.event.label.name == 'Alpha Cruzado'
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
       - name: Call http action again
-        if: github.event.label.name == 'Alpha Cruzado'
         shell: bash
         run: |
           echo "Chamando a action"          
