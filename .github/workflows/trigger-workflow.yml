@@ -3,7 +3,7 @@ name: Main action
 on:
   pull_request:
     branches: [master]
-    # types: [labeled]
+    types: [labeled]
 
 env:
   BRANCH: ${{ github.ref }}
@@ -14,7 +14,7 @@ jobs:
     permissions: write-all
     steps:
       - name: Call http action
-        # if: github.event.label.name == 'Em revisão'
+        if: github.event.label.name == 'Em revisão'
         shell: bash
         run: |
           echo "Chamando a action"          
@@ -27,11 +27,12 @@ jobs:
             --data '{"ref":"master","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}", "result": "✅ Tests - Success"}'
 
       - name: Call http action again
+        if: github.event.label.name == 'Alpha Cruzado'
         shell: bash
         run: |
           echo "Chamando a action"          
           curl --request POST \
-            --url 'https://api.github.com/repos/calvesrodrig/github-flow/actions/workflows/51755224/dispatches' \
+            --url 'https://api.github.com/repos/calvesrodrig/github-flow/actions/workflows/51897563/dispatches' \
             --header 'Accept: application/vnd.github+json' \
             --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'Content-Type: application/json' \
