@@ -1,4 +1,4 @@
-name: http-request-workflow
+name: http-request-workflow-2
 
 on:
   workflow_dispatch:
@@ -26,4 +26,4 @@ jobs:
       with:
         message: ${{ inputs.result }}
         pr_number: ${{ inputs.PR }}
-        comment_tag: frontend_test
+        comment_tag: auto_merge
