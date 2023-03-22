@@ -13,14 +13,16 @@ jobs:
     if: github.event.label.name == 'Pronto para merge'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+
       - name: Install script dependencies
         shell: bash
-        working-directory: .github/scripts
+        working-directory: ./.github/scripts
         run: npm install
 
       - name: Run check
         shell: bash
-        working-directory: .github/scripts
+        working-directory: ./.github/scripts
         env:
           REPOSITORY: ${{ github.repository }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
