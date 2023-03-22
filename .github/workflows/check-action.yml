@@ -15,12 +15,12 @@ jobs:
     steps:
       - name: Install script dependencies
         shell: bash
-        working-directory: ./.github/scripts
-        run: npm ci
+        working-directory: .github/scripts
+        run: npm install
 
       - name: Run check
         shell: bash
-        working-directory: ./.github/scripts
+        working-directory: .github/scripts
         env:
           REPOSITORY: ${{ github.repository }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
