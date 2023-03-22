@@ -1,0 +1,29 @@
+name: Check action
+
+on:
+  pull_request:
+    branches: [master]
+    types: [labeled]
+
+env:
+  BRANCH: ${{ github.ref }}
+
+jobs:
+  check:
+    if: github.event.label.name == 'Pronto para merge'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install script dependencies
+        shell: bash
+        working-directory: ./.github/scripts
+        run: npm ci
+
+      - name: Run check
+        shell: bash
+        working-directory: ./.github/scripts
+        env:
+          REPOSITORY: ${{ github.repository }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUMBER_OF_WORKFLOWS: 2
+          PR_NUMBER: ${{ github.event.number }}
+        run: node check.js
