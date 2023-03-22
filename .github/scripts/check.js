@@ -1,5 +1,5 @@
 const { Octokit } = require('@octokit/rest')
-import process from 'node:process';
+const process = require('node:process')
 
 const TOKEN = process.env.TOKEN
 const numberOfWorkflows = process.env.NUMBER_OF_WORKFLOWS
