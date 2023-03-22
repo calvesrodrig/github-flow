@@ -3,7 +3,7 @@ const process = require('node:process')
 
 const TOKEN = process.env.TOKEN
 const numberOfWorkflows = process.env.NUMBER_OF_WORKFLOWS
-const [owner, repo] = process.env.REPOSITORY
+const [owner, repo] = process.env.REPOSITORY.split('/')
 const issue_number = process.env.PR_NUMBER
 
 const check = async () => {
