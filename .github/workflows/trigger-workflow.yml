@@ -41,4 +41,4 @@ jobs:
             --header 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             --header 'Content-Type: application/json' \
             --header 'X-GitHub-Api-Version: 2022-11-28' \
-            --data '{"ref":"master","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}", "result": "❌ Merge - Failed \n https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+            --data '{"ref":"master","inputs":{"branch": "${{ github.ref }}","PR": "${{ github.event.number }}"}'
