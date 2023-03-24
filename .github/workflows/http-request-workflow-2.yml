@@ -22,6 +22,8 @@ jobs:
       fail-fast: false
       matrix:
         containers: [0, 1]
+    outputs:
+      test_status: ${{ steps.finish.outputs.result }}
     steps:
         # - name: start result env
         #   shell: bash
@@ -36,9 +38,7 @@ jobs:
           id: finish
           if: failure()
           shell: bash
-          run: |
-            echo "::set-env name=RESULT::${{ job.status }}
-            echo "RESULT = $RESULT"
+          run: echo "::set-output name=result::failure"
 
   check_test_results:
     needs: [run-tests]
@@ -48,9 +48,7 @@ jobs:
     steps:
         - name: Echo outputs
           shell: bash
-          run: |
-            echo "RESULT = $RESULT"
-            echo ${{ env.RESULT }}
+          run: echo ${{ needs.run-tests.outputs.test_status }}
       # - name: Comment success
       #   if: ${{ job.status }}" == "success"
       #   uses: thollander/actions-comment-pull-request@v2
