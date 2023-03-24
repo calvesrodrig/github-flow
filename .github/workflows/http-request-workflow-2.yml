@@ -36,7 +36,9 @@ jobs:
           id: finish
           if: failure()
           shell: bash
-          run: echo "RESULT=${{ job.status }}" >> $GITHUB_ENV
+          run: |
+            echo "::set-env name=RESULT::${{ job.status }}
+            echo "RESULT = $RESULT"
 
   check_test_results:
     needs: [run-tests]
@@ -46,7 +48,9 @@ jobs:
     steps:
         - name: Echo outputs
           shell: bash
-          run: echo ${{ env.RESULT }}
+          run: |
+            echo "RESULT = $RESULT"
+            echo ${{ env.RESULT }}
       # - name: Comment success
       #   if: ${{ job.status }}" == "success"
       #   uses: thollander/actions-comment-pull-request@v2
