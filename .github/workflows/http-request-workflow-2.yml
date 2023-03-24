@@ -16,26 +16,32 @@ jobs:
   run-tests:
     runs-on: ubuntu-latest
     outputs:
-        results: ${{ steps.start.outputs }}
+        results: ${{ steps.start.outputs.result }}
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        containers: [0, 1]
     steps:
         - name: start
           id: start
           shell: bash
-          run: exit 1
+          run: exit ${{ matrix.containers }}
 
-  check_test_results:
-    needs: [run-tests]
-    permissions: write-all
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
-        - name: Echo outputs
+        - name: get output
+          if: always()
           shell: bash
-          run: echo ${{ needs.run-tests.outputs.results }}
+          # run: echo "result=${{ steps.start.outputs }}" >> "$GITHUB_OUTPUT"
+          run: ${{ job.status }}
+
+  # check_test_results:
+  #   needs: [run-tests]
+  #   permissions: write-all
+  #   runs-on: ubuntu-latest
+  #   if: ${{ always() }}
+  #   steps:
+  #       - name: Echo outputs
+  #         shell: bash
+  #         run: echo ${{ needs.run-tests.outputs.results }}
       # - name: Comment success
       #   if: ${{ job.status }}" == "success"
       #   uses: thollander/actions-comment-pull-request@v2
