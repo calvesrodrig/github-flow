@@ -41,7 +41,7 @@ jobs:
     steps:
         - name: Echo outputs
           shell: bash
-          run: echo ${{ toJSON(needs.jobs.run-tests.strategy) }}
+          run: echo ${{ github.jobs.run-tests.strategy }}
       # - name: Comment success
       #   if: ${{ job.status }}" == "success"
       #   uses: thollander/actions-comment-pull-request@v2
