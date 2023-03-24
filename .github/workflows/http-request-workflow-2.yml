@@ -32,7 +32,7 @@ jobs:
         - name: start
           id: start
           shell: bash
-          run: exit ${{ matrix.containers }}
+          run: exit 0
 
         - name: set output
           id: finish
