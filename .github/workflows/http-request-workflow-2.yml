@@ -12,7 +12,8 @@ on:
         description: the current PR
         type: string
 
-
+env:
+  RESULT: success
 
 jobs:
   run-tests:
@@ -22,9 +23,9 @@ jobs:
       matrix:
         containers: [0, 1]
     steps:
-        - name: start result env
-          shell: bash
-          run: echo "RESULT=success" >> $GITHUB_ENV
+        # - name: start result env
+        #   shell: bash
+        #   run: echo "RESULT=success" >> $GITHUB_ENV
 
         - name: start
           id: start
