@@ -12,6 +12,8 @@ on:
         description: the current PR
         type: string
 
+
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
@@ -19,19 +21,21 @@ jobs:
       fail-fast: false
       matrix:
         containers: [0, 1]
-    outputs:
-        results: ${{ steps.finish.outputs.result }}
     steps:
+        - name: start result env
+          shell: bash
+          run: echo "RESULT=success" >> $GITHUB_ENV
+
         - name: start
           id: start
           shell: bash
           run: exit ${{ matrix.containers }}
 
-        - name: get output
+        - name: set output
           id: finish
-          if: always()
+          if: failure()
           shell: bash
-          run: echo "result=${{ job.status }}" >> "$GITHUB_OUTPUT"
+          run: echo "RESULT=${{ job.status }}" >> $GITHUB_ENV
 
   check_test_results:
     needs: [run-tests]
@@ -41,7 +45,7 @@ jobs:
     steps:
         - name: Echo outputs
           shell: bash
-          run: echo ${{ github.jobs.run-tests.strategy }}
+          run: echo ${{ env.RESULT }}
       # - name: Comment success
       #   if: ${{ job.status }}" == "success"
       #   uses: thollander/actions-comment-pull-request@v2
